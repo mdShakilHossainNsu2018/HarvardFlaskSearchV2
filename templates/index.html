@@ -1,10 +1,26 @@
 {% extends 'base.html' %}
-
+{% block title %}
+<title>Home</title>
+{% endblock %}
 {% block content %}
 <nav class="navbar navbar-light bg-light">
-  <form class="form-inline" action="/search" method="get">
-    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
+
+    <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search">
+
 </nav>
+        <br><br>
+    <a style="margin-left: 20px" class="btn btn-primary" href="/" role="button"> search again </a>
+    <br>
+    <hr>
+    <br>
+    <ul></ul>
+    <script>
+    let input = document.querySelector('input');
+    input.onkeyup = function () {
+        $.get('/search?q=' + input.value, function (data) {
+            document.querySelector('ul').innerHTML = data;
+            
+        });
+    };
+    </script>
 {% endblock %}
